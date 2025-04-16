@@ -57,11 +57,7 @@ package("glfw")
         end
         table.insert(configs, "-DGLFW_BUILD_X11=" .. (package:config("x11") and "ON" or "OFF"))
         table.insert(configs, "-DGLFW_BUILD_WAYLAND=" .. (package:config("wayland") and "ON" or "OFF"))
-        if package:is_plat("linux") then
-            import("package.tools.cmake").install(package, configs, {packagedeps = {"libxrender", "libxfixes", "libxext", "libx11", "wayland"}})
-        else
-            import("package.tools.cmake").install(package, configs)
-        end
+        import("package.tools.cmake").install(package, configs)
     end)
 
     on_test(function (package)
